@@ -1,0 +1,15 @@
+FLICKR:
+  API_KEY: { API_KEY }
+  SECRET: { SECRET }
+  ACCESS_TOKEN: { ACCESS_TOKEN }
+  TOKEN_SECRET: { TOKEN_SECRET }
+  SIZES: ["url_o", "url_k", "url_h", "url_l", "url_c"] # in order of preference
+
+MOSAIC_ML:
+  API: { KEY }
+  MODEL: mpt-30b-instruct/v1
+  HOST: https://models.hosted-on.mosaicml.hosting/
+
+IMAGETOCAPTION:
+  MODEL: Salesforce/blip-image-captioning-large
+  TYPE: image-to-text
