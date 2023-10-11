@@ -1,1 +1,0 @@
-mcli set api-key $1
