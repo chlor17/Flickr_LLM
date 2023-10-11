@@ -1,0 +1,15 @@
+FLICKR:
+  API_KEY : 462f8e29852bb3330a49734ae6cf1d59
+  SECRET : ecc275b45d62e864
+  ACCESS_TOKEN : 72157720895409885-aa3e89a583876e51
+  TOKEN_SECRET : e5316384df71ec1a
+  SIZES : ["url_o", "url_k", "url_h", "url_l", "url_c"]  # in order of preference
+
+MOSAIC_ML:
+  API : C7VuAm.Kq5k7cSEtJjTvVhDf.yi/YuFu9GxhDIdOURsHCgQ
+  MODEL : mpt-30b-instruct/v1
+  HOST : https://models.hosted-on.mosaicml.hosting/
+
+IMAGETOCAPTION:
+  MODEL : Salesforce/blip-image-captioning-large
+  TYPE : image-to-text
