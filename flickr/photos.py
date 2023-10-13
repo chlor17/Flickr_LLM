@@ -12,6 +12,8 @@ class Photos:
         self.image_path = os.path.join(self.destination_path, self.image_name)
         self.photo_size = ["url_o", "url_k", "url_h", "url_l", "url_c"]
         self.url = None
+        self.caption = None
+        self.story = None
 
 
     def get_url(self, conn): # should be only 1, assumes all image name are different
@@ -19,15 +21,14 @@ class Photos:
                               user_id=self.user_id,
                               extras= ','.join(self.photo_size),
                               privacy_filter=1, 
-                              per_page=50,
+                              per_page=1,
                               sort='relevance')
-        print(photos_list)
-        # try:
-        for photo in photos_list:
-            for size in range(len(self.photo_size)):  # makes sure the loop is done in the order we want
-                self.url = photo.get(self.photo_size[size])
-        # except:
-        #     print("Photo list seems empty")
+        try:
+            for photo in photos_list:
+                for size in range(len(self.photo_size)):  # makes sure the loop is done in the order we want
+                    self.url = photo.get(self.photo_size[size])
+        except:
+            print("Photo list seems empty")
 
     def download_image(self):
         # if not os.path.isdir(self.destination_path):
@@ -44,4 +45,11 @@ class Photos:
 
     def print_image(self):
       image = Image.open(os.path.join(self.destination_path, self.image_name)) 
-      print(image)
+      display(image)
+
+    def get_image(self):
+      return Image.open(os.path.join(self.destination_path, self.image_name)) .convert("RGB")
+  
+    def get_image_id(self):
+        return self.url.split('/')[4].split('_')[0]
+
