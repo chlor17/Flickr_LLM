@@ -10,5 +10,5 @@ class image_to_caption:
         self.captioner = pipeline(self.model_type, model=self.model_name)
 
     def image_to_caption(self, image):
-        caption = self.captioner(image.get_image())[0]["generated_text"]
+        caption = self.captioner(image.get_image())
         return caption

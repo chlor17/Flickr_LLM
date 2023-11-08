@@ -3,6 +3,7 @@ import requests
 import os
 import sys
 import time
+import xmltodict
 
 class Photos:
     def __init__(self, image_name, user_id, destination_path = "/Volumes/chlor_catalog/flickr_llm/photos/"):
@@ -14,7 +15,12 @@ class Photos:
         self.url = None
         self.caption = None
         self.story = None
-
+        self.aperture = None
+        self.exposuretime = None
+        self.iso = None
+        self.createdate = None
+        # self.geo = None
+        self.photo_id = None
 
     def get_url(self, conn): # should be only 1, assumes all image name are different
         photos_list = conn.walk(text=self.image_name,
@@ -27,6 +33,7 @@ class Photos:
             for photo in photos_list:
                 for size in range(len(self.photo_size)):  # makes sure the loop is done in the order we want
                     self.url = photo.get(self.photo_size[size])
+                    self.photo_id = self.get_image_id()
         except:
             print("Photo list seems empty")
 
@@ -52,4 +59,19 @@ class Photos:
   
     def get_image_id(self):
         return self.url.split('/')[4].split('_')[0]
+        
 
+    def parse_xml(self, xml):
+        dict_f = xmltodict.parse(xml)
+
+        for info in (dict_f['rsp']['photo']['exif']):
+            if (info['@tag'] == "ExposureTime"):
+                self.exposuretime = info['raw']
+            elif (info['@tag'] == "FNumber"):
+                self.aperture = info['raw']
+            elif (info['@tag'] == "ISO"):
+                self.iso = info['raw']
+            elif (info['@tag'] == "CreateDate"):
+                self.createdate = info['raw']
+            elif (info['@tag'] == "CreateDate"):
+                self.createdate = info['raw']

@@ -38,3 +38,17 @@ class Flickr_sess:
         r = self.flickr.post(url, data=data)
         print(r)
         return r
+    
+    def get_exif(self, photo):
+        url = "https://www.flickr.com/services/rest/?method=flickr.photos.getExif&photo_id=" + str(photo.get_image_id())
+        r = self.flickr.get(url)
+        return r.content
+    
+    def get_photo_list(self, user_id):
+        url = "https://www.flickr.com/services/rest/?method=flickr.people.getPublicPhotos&user_id=" + str(user_id)
+        r = self.flickr.get(url)
+        return r.content
+
+
+
+
